@@ -35,5 +35,8 @@ public class DemoApplication implements CommandLineRunner {
         System.out.println(all);
         System.out.println();
         System.out.println();
+
+        studentRepository.createRandomStudents(150);
+        studentRepository.iterateOverAll();
     }
 }
