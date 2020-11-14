@@ -24,8 +24,8 @@ public class DemoApplication implements CommandLineRunner {
         Student pietro = new Student("Pietro");
         Student pippo = new Student("Pippo");
 
-        studentRepository.insert(pietro);
-        studentRepository.insert(pippo);
+        studentRepository.save(pietro);
+        studentRepository.save(pippo);
 
         List<Student> all = studentRepository.findAll();
 
@@ -36,7 +36,7 @@ public class DemoApplication implements CommandLineRunner {
         System.out.println();
         System.out.println();
 
-        studentRepository.createRandomStudents(150);
+        studentRepository.createRandomStudents(15);
         studentRepository.iterateOverAll();
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.function.UnaryOperator;
 
 @Repository
 @Transactional
@@ -19,7 +20,7 @@ public class StudentRepository {
     @Autowired
     EntityManager em;
 
-    public void insert(Student student) {
+    public void save(Student student) {
         em.persist(student);
     }
 
@@ -42,6 +43,17 @@ public class StudentRepository {
             Student s = (Student) results.get()[0];
             session.detach(s);
             System.out.println(s);
+        }
+    }
+
+    public void forEach(Query<Student> query, UnaryOperator<Student> lambda) {
+        Session session = em.unwrap(Session.class);
+        ScrollableResults results = query.setFetchSize(100).setReadOnly(true).setCacheable(false).scroll(ScrollMode.FORWARD_ONLY);
+
+        while (results.next()) {
+            Student student = (Student) results.get()[0];
+            session.detach(student);
+            lambda.apply(student);
         }
     }
 }

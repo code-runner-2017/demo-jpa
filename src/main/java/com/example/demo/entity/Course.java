@@ -21,11 +21,11 @@ public class Course {
         this.name = name;
     }
 
+    @Getter
     @ManyToMany(mappedBy="courses")
     List<Student> students = new ArrayList<>();
 
     public void addStudent(Student s) {
         this.students.add(s);
-        s.addCourse(this);
     }
 }
