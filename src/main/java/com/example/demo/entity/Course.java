@@ -6,7 +6,9 @@ import lombok.extern.java.Log;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Log
 @Entity
@@ -23,7 +25,7 @@ public class Course {
 
     @Getter
     @ManyToMany(mappedBy="courses")
-    List<Student> students = new ArrayList<>();
+    Set<Student> students = new HashSet<>();    // do not use List!!!
 
     public void addStudent(Student s) {
         this.students.add(s);

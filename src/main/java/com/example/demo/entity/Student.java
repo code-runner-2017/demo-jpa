@@ -5,7 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Student {
@@ -47,7 +49,7 @@ public class Student {
     }
 
     @ManyToMany
-    List<Course> courses = new ArrayList<>();
+    Set<Course> courses = new HashSet<>();  // DO NOT USE List!!!
 
     public void addCourse(Course c) {
         this.courses.add(c);
